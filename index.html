@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CampusSync - University Event & Academic Coordination Platform</title>
+    <meta name="description" content="Academic-context-aware university event coordination platform connecting campus events with student timetables, conflict detection, DSA approvals, and verified OD attendance." />
+    <meta property="og:title" content="CampusSync - University Event & Academic Coordination Platform" />
+    <meta property="og:description" content="Academic-context-aware university event coordination platform connecting campus events with student timetables, conflict detection, DSA approvals, and verified OD attendance." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+    <!-- CSS3 Design System -->
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+
+    <!-- 1. HEADER & TOP BAR -->
+    <header class="site-header" role="banner">
+      <div class="container navbar">
+        
+        <!-- Brand Wordmark -->
+        <a href="#landing" class="brand-link" id="brand-logo-btn" aria-label="CampusSync Home">
+          <div class="brand-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+              <line x1="16" x2="16" y1="2" y2="6"/>
+              <line x1="8" x2="8" y1="2" y2="6"/>
+              <line x1="3" x2="21" y1="10" y2="10"/>
+            </svg>
+          </div>
+          <span class="brand-title">Campus<span>Sync</span></span>
+        </a>
+
+        <!-- Main Navigation Links -->
+        <nav class="nav-links" id="main-nav" role="navigation" aria-label="Main Navigation">
+          <button class="nav-link active" data-tab="landing">Home</button>
+          <button class="nav-link" data-tab="discover">Discover Events</button>
+          <button class="nav-link nav-student-only" data-tab="timetable">My Timetable</button>
+          <button class="nav-link nav-student-only" data-tab="registrations">My Passes & OD</button>
+          <button class="nav-link nav-organizer-only hidden" data-tab="organizer">Organizer Console</button>
+          <button class="nav-link nav-dsa-only hidden" data-tab="dsa">DSA Approvals & OD</button>
+          <button class="nav-link nav-admin-only hidden" data-tab="admin">Admin Master</button>
+          <button class="nav-link" data-tab="clubs">Campus Clubs</button>
+        </nav>
+
+        <!-- Right Side: Notifications, Demo Reset, User Profile -->
+        <div class="nav-actions">
+          
+          <!-- Notifications Bell -->
+          <button class="icon-btn" id="notif-toggle-btn" aria-label="Open notifications" title="Notifications">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+            </svg>
+            <span class="badge-dot" id="notif-badge"></span>
+          </button>
+
+          <!-- Reset Demo State Button -->
+          <button class="icon-btn" id="reset-data-btn" aria-label="Reset demo data" title="Reset Demo Data">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+              <path d="M3 3v5h5"/>
+            </svg>
+          </button>
+
+          <!-- User Persona Menu -->
+          <div class="role-dropdown-container">
+            <button class="user-profile-btn" id="user-menu-btn" aria-haspopup="true" aria-expanded="false">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=256&q=80" alt="User avatar" class="user-avatar" id="current-user-avatar" />
+              <div class="user-meta">
+                <span class="user-name" id="current-user-name">Priya Sharma</span>
+                <span class="user-role-badge" id="current-user-role">Student</span>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6"/>
+              </svg>
+            </button>
+
+            <!-- Role Menu Dropdown -->
+            <div class="role-dropdown-menu" id="role-menu-dropdown" role="menu">
+              <div class="role-dropdown-header">Switch Perspective</div>
+              <button class="role-option-item selected" data-role="STUDENT" role="menuitem">
+                <span class="role-option-title">Student</span>
+                <span class="role-option-sub">Priya Sharma (3rd Year CSE)</span>
+              </button>
+              <button class="role-option-item" data-role="ORGANIZER" role="menuitem">
+                <span class="role-option-title">Event Organizer</span>
+                <span class="role-option-sub">Arjun Patel (IEEE Branch)</span>
+              </button>
+              <button class="role-option-item" data-role="DSA" role="menuitem">
+                <span class="role-option-title">DSA Office</span>
+                <span class="role-option-sub">Dr. V. Ramanathan (Dean)</span>
+              </button>
+              <button class="role-option-item" data-role="ADMIN" role="menuitem">
+                <span class="role-option-title">Administrator</span>
+                <span class="role-option-sub">Campus IT Systems</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </header>
+
+    <!-- 2. MAIN APP CONTENT -->
+    <main class="main-content" role="main">
+
+      <!-- ================= VIEW 1: LANDING PAGE ================= -->
+      <section id="view-landing" class="tab-view">
+        <div class="container">
+          
+          <!-- Hero Banner -->
+          <div class="hero-section">
+            <div class="hero-pill">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              Smart Academic Timetable Synchronization
+            </div>
+            <h1 class="hero-title">Coordinate Campus Events<br>Without <span>Missing Class</span></h1>
+            <p class="hero-subtitle">
+              The first university event coordination platform that connects student timetables, 
+              automates academic conflict detection, streamlines DSA On-Duty (OD) approvals, and generates verified gate passes.
+            </p>
+            <div class="hero-actions">
+              <button class="btn btn-primary btn-lg" id="hero-btn-discover">
+                Discover Campus Events
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </button>
+              <button class="btn btn-secondary btn-lg" id="hero-btn-timetable">
+                View My Timetable & OD
+              </button>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="hero-stats-grid">
+              <div class="hero-stat-card">
+                <div class="hero-stat-number">98.4%</div>
+                <div class="hero-stat-label">OD Approval Accuracy</div>
+                <div class="hero-stat-sub">Zero manual paperwork delays</div>
+              </div>
+              <div class="hero-stat-card">
+                <div class="hero-stat-number">42+</div>
+                <div class="hero-stat-label">Active Campus Clubs</div>
+                <div class="hero-stat-sub">Technical, cultural, sports & research</div>
+              </div>
+              <div class="hero-stat-card">
+                <div class="hero-stat-number">0</div>
+                <div class="hero-stat-label">Attendance Surprises</div>
+                <div class="hero-stat-sub">Instant timetable clash warnings</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature Pillars -->
+          <div class="section-header">
+            <div>
+              <div class="section-tag">Academic Architecture</div>
+              <h2 class="section-title">Built For Frictionless Campus Life</h2>
+            </div>
+          </div>
+
+          <div class="features-grid">
+            <article class="feature-card">
+              <div class="feature-icon-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+              </div>
+              <h3>Automated Conflict Detection</h3>
+              <p>Pre-registration algorithms cross-check student class hours with event schedules, calculating overlap down to the exact minute.</p>
+            </article>
+
+            <article class="feature-card">
+              <div class="feature-icon-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              </div>
+              <h3>One-Click On-Duty (OD) Workflow</h3>
+              <p>DSA-sanctioned events allow instant OD submission. The Dean's office approves exemptions with a single click, protecting attendance records.</p>
+            </article>
+
+            <article class="feature-card">
+              <div class="feature-icon-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <h3>Venue Collision Prevention</h3>
+              <p>Auditoriums and tech labs are protected against double bookings with real-time room occupancy scheduling and facility validation.</p>
+            </article>
+          </div>
+
+          <!-- Featured Upcoming Events -->
+          <div class="section-header">
+            <div>
+              <div class="section-tag">What's Happening</div>
+              <h2 class="section-title">Featured Campus Events</h2>
+            </div>
+            <button class="btn btn-cream btn-sm" id="landing-view-all-events-btn">
+              Explore All Events &rarr;
+            </button>
+          </div>
+
+          <div class="events-grid" id="landing-featured-events-grid">
+            <!-- Dynamically populated by app.js -->
+          </div>
+
+          <!-- Role Workflow Cards -->
+          <div style="margin-top: 4rem;">
+            <div class="section-header">
+              <div>
+                <div class="section-tag">Role-Based Experiences</div>
+                <h2 class="section-title">Designed for Every Campus Stakeholder</h2>
+              </div>
+            </div>
+
+            <div class="persona-cards-grid">
+              <div class="persona-card">
+                <div>
+                  <div class="persona-header">
+                    <span class="persona-badge">Student</span>
+                    <h3 style="font-size: 1.125rem;">Priya Sharma</h3>
+                  </div>
+                  <p style="font-size: 0.8125rem; color: var(--text-secondary);">
+                    Browse upcoming workshops and hackathons with real-time warnings if sessions clash with lectures or labs.
+                  </p>
+                  <ul class="persona-features-list">
+                    <li>✓ Automatic lecture clash alerts</li>
+                    <li>✓ One-click OD exemption requests</li>
+                    <li>✓ Digital QR Gate Passes on mobile</li>
+                  </ul>
+                </div>
+                <button class="btn btn-primary btn-sm" data-action="switch-role" data-target="STUDENT">
+                  Switch to Student View
+                </button>
+              </div>
+
+              <div class="persona-card">
+                <div>
+                  <div class="persona-header">
+                    <span class="persona-badge">Organizer</span>
+                    <h3 style="font-size: 1.125rem;">Arjun Patel</h3>
+                  </div>
+                  <p style="font-size: 0.8125rem; color: var(--text-secondary);">
+                    Propose flagship events, check auditorium availability, and verify attendance at the venue entrance.
+                  </p>
+                  <ul class="persona-features-list">
+                    <li>✓ Zero double-booked venues</li>
+                    <li>✓ Live registration count & caps</li>
+                    <li>✓ Fast Gate QR Ticket Scanner</li>
+                  </ul>
+                </div>
+                <button class="btn btn-secondary btn-sm" data-action="switch-role" data-target="ORGANIZER">
+                  Switch to Organizer Console
+                </button>
+              </div>
+
+              <div class="persona-card">
+                <div>
+                  <div class="persona-header">
+                    <span class="persona-badge">DSA Dean</span>
+                    <h3 style="font-size: 1.125rem;">Dr. V. Ramanathan</h3>
+                  </div>
+                  <p style="font-size: 0.8125rem; color: var(--text-secondary);">
+                    Review institutional event proposals, approve OD exemptions, and maintain audited attendance records.
+                  </p>
+                  <ul class="persona-features-list">
+                    <li>✓ One-click OD request sanctioning</li>
+                    <li>✓ Academic attendance protection</li>
+                    <li>✓ Verified institutional audit log</li>
+                  </ul>
+                </div>
+                <button class="btn btn-cream btn-sm" data-action="switch-role" data-target="DSA">
+                  Switch to DSA Office
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= VIEW 2: DISCOVER EVENTS ================= -->
+      <section id="view-discover" class="tab-view hidden">
+        <div class="container">
+          
+          <div class="section-header" style="margin-top: 1.5rem;">
+            <div>
+              <div class="section-tag">Campus Directory</div>
+              <h1 class="section-title">Discover Events & Workshops</h1>
+            </div>
+          </div>
+
+          <!-- Filter Toolbar -->
+          <div class="filter-toolbar">
+            <!-- Search bar -->
+            <div class="search-input-wrapper">
+              <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <input type="text" id="event-search-input" class="form-input" placeholder="Search events by title, club, keyword, or venue..." />
+            </div>
+
+            <!-- Categories Scroll -->
+            <div class="filter-categories-scroll" id="category-pills-container">
+              <button class="category-pill-btn active" data-category="ALL">All Categories</button>
+              <button class="category-pill-btn" data-category="Technology">Technology</button>
+              <button class="category-pill-btn" data-category="Hackathons">Hackathons</button>
+              <button class="category-pill-btn" data-category="Entrepreneurship">Entrepreneurship</button>
+              <button class="category-pill-btn" data-category="Arts & Culture">Arts & Culture</button>
+              <button class="category-pill-btn" data-category="Music">Music</button>
+              <button class="category-pill-btn" data-category="Research">Research</button>
+              <button class="category-pill-btn" data-category="Workshops">Workshops</button>
+            </div>
+
+            <!-- Extra Filters -->
+            <div class="filter-extra-row">
+              <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                  <input type="checkbox" id="filter-od-only" style="accent-color: var(--accent-terracotta);" />
+                  <span>OD-Eligible Only</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                  <input type="checkbox" id="filter-available-only" style="accent-color: var(--accent-terracotta);" />
+                  <span>Open Seats Available</span>
+                </label>
+              </div>
+
+              <div id="events-count-label" style="color: var(--text-muted); font-weight: 600;">
+                Showing 0 events
+              </div>
+            </div>
+          </div>
+
+          <!-- Events Grid -->
+          <div class="events-grid" id="discover-events-grid">
+            <!-- Populated by app.js -->
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= VIEW 3: TIMETABLE VIEW ================= -->
+      <section id="view-timetable" class="tab-view hidden">
+        <div class="container">
+          
+          <div class="section-header" style="margin-top: 1.5rem;">
+            <div>
+              <div class="section-tag">Academic Schedule</div>
+              <h1 class="section-title">Weekly Lecture & Lab Timetable</h1>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.25rem;">
+                Student: <strong>Priya Sharma</strong> (Roll: 21CS042, 3rd Year CSE)
+              </p>
+            </div>
+
+            <!-- Overlay Toggle -->
+            <div style="display: flex; align-items: center; gap: 0.75rem; background-color: var(--bg-card); padding: 0.5rem 1rem; border-radius: var(--radius-full); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
+              <input type="checkbox" id="toggle-overlay-events" checked style="accent-color: var(--accent-terracotta);" />
+              <label for="toggle-overlay-events" style="font-size: 0.8125rem; font-weight: 700; color: var(--text-primary); cursor: pointer;">
+                Overlay Registered Events on Schedule
+              </label>
+            </div>
+          </div>
+
+          <!-- Timetable Grid Container -->
+          <div class="timetable-container">
+            <div class="timetable-grid" id="weekly-timetable-content">
+              <!-- Dynamically populated by app.js -->
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= VIEW 4: MY PASSES & OD ================= -->
+      <section id="view-registrations" class="tab-view hidden">
+        <div class="container">
+          
+          <div class="section-header" style="margin-top: 1.5rem;">
+            <div>
+              <div class="section-tag">Gate Verification</div>
+              <h1 class="section-title">My Event Passes & On-Duty Status</h1>
+            </div>
+            <button class="btn btn-primary btn-sm" id="passes-explore-btn">
+              Explore More Events
+            </button>
+          </div>
+
+          <!-- Passes Grid -->
+          <div class="passes-grid" id="my-passes-grid">
+            <!-- Populated by app.js -->
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= VIEW 5: ORGANIZER CONSOLE ================= -->
+      <section id="view-organizer" class="tab-view hidden">
+        <div class="container">
+          
+          <div class="section-header" style="margin-top: 1.5rem;">
+            <div>
+              <div class="section-tag">Organizer Command Center</div>
+              <h1 class="section-title">Event Operations & Management</h1>
+              <p style="font-size: 0.875rem; color: var(--text-secondary);">
+                Club Lead: <strong>Arjun Patel</strong> (IEEE Student Branch)
+              </p>
+            </div>
+          </div>
+
+          <!-- Organizer Metrics -->
+          <div class="dashboard-metrics-grid">
+            <div class="metric-card">
+              <div class="metric-card-title">Events Managed</div>
+              <div class="metric-card-val" id="org-metric-events">3</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-card-title">Total Registrations</div>
+              <div class="metric-card-val" id="org-metric-reg">134</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-card-title">Venue Clashes Avoided</div>
+              <div class="metric-card-val" style="color: var(--success-solid);">100%</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-card-title">Approved by DSA</div>
+              <div class="metric-card-val" id="org-metric-approved">2</div>
+            </div>
+          </div>
+
+          <!-- Create Event Section -->
+          <div class="scanner-card" style="margin-bottom: 2rem;">
+            <div class="section-header" style="margin-bottom: 1rem;">
+              <div>
+                <h3 style="font-size: 1.25rem;">Propose New Campus Event</h3>
+                <p style="font-size: 0.8125rem; color: var(--text-secondary);">
+                  Automatic venue collision detection checks room availability in real-time.
+                </p>
+              </div>
+            </div>
+
+            <form id="create-event-form" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+              <div class="form-group" style="grid-column: span 2;">
+                <label class="form-label">Event Title</label>
+                <input type="text" id="ev-form-title" class="form-input" placeholder="e.g. Smart Mobility & IoT Hackathon" required />
+              </div>
+
+              <div class="form-group" style="grid-column: span 2;">
+                <label class="form-label">Description & Syllabus</label>
+                <textarea id="ev-form-desc" class="form-textarea" rows="3" placeholder="Brief outline of agenda, guest mentors, and outcomes..." required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Category</label>
+                <select id="ev-form-category" class="form-select">
+                  <option value="Technology">Technology</option>
+                  <option value="Hackathons">Hackathons</option>
+                  <option value="Entrepreneurship">Entrepreneurship</option>
+                  <option value="Arts & Culture">Arts & Culture</option>
+                  <option value="Music">Music</option>
+                  <option value="Research">Research</option>
+                  <option value="Workshops">Workshops</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Host Club</label>
+                <select id="ev-form-club" class="form-select">
+                  <!-- Populated from storage -->
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Date</label>
+                <input type="date" id="ev-form-date" class="form-input" value="2026-11-10" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Venue</label>
+                <select id="ev-form-venue" class="form-select">
+                  <!-- Populated from storage -->
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Start Time</label>
+                <input type="time" id="ev-form-start" class="form-input" value="14:00" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">End Time</label>
+                <input type="time" id="ev-form-end" class="form-input" value="17:00" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Max Seating Capacity</label>
+                <input type="number" id="ev-form-capacity" class="form-input" value="100" min="10" max="1000" />
+              </div>
+
+              <div class="form-group" style="display: flex; justify-content: center; align-items: flex-start; margin-top: 1.5rem;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.8125rem; font-weight: 700;">
+                  <input type="checkbox" id="ev-form-od" checked style="accent-color: var(--accent-terracotta);" />
+                  Request Academic On-Duty (OD) Eligibility
+                </label>
+              </div>
+
+              <!-- Venue Clash Alert Placeholder -->
+              <div id="venue-clash-warning" class="hidden" style="grid-column: span 2; padding: 0.75rem 1rem; border-radius: var(--radius-md); background-color: var(--danger-bg); border: 1px solid var(--danger-border); color: var(--danger-text); font-size: 0.8125rem;">
+                <!-- Filled dynamically -->
+              </div>
+
+              <div style="grid-column: span 2; display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 0.5rem;">
+                <button type="submit" class="btn btn-primary" id="btn-submit-proposal">
+                  Submit Proposal for DSA Review
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Gate Scanner Simulator -->
+          <div class="scanner-card">
+            <div class="section-header" style="margin-bottom: 0.5rem;">
+              <div>
+                <h3 style="font-size: 1.25rem;">Fast Gate Ticket Scanner Simulator</h3>
+                <p style="font-size: 0.8125rem; color: var(--text-secondary);">
+                  Simulate QR scanner verification at entrance gates to mark verified attendance.
+                </p>
+              </div>
+            </div>
+
+            <div class="scanner-input-group">
+              <input type="text" id="scanner-code-input" class="form-input" placeholder="Enter or paste student pass code (e.g. CAMPUS-SYNC-EV5-21CS042-882194)..." />
+              <button class="btn btn-primary" id="btn-verify-pass">
+                Verify Pass
+              </button>
+            </div>
+
+            <div id="scanner-result-box" class="hidden" style="margin-top: 1rem; padding: 1rem; border-radius: var(--radius-md); font-size: 0.8125rem;">
+              <!-- Verification outcome -->
+            </div>
+          </div>
+
+          <!-- Manage Events Table -->
+          <div class="data-table-container">
+            <div style="padding: 1.25rem; border-bottom: 1px solid var(--border-subtle);">
+              <h3 style="font-size: 1.125rem;">Organized Events Roster</h3>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Event Title</th>
+                  <th>Date & Time</th>
+                  <th>Venue</th>
+                  <th>Registrations</th>
+                  <th>DSA Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="org-events-table-body">
+                <!-- Dynamically filled -->
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= VIEW 6: DSA DASHBOARD ================= -->
+      <section id="view-dsa" class="tab-view hidden">
+        <div class="container">
+          
+          <div class="section-header" style="margin-top: 1.5rem;">
+            <div>
+              <div class="section-tag">Institutional Oversight</div>
+              <h1 class="section-title">DSA Approvals & On-Duty Console</h1>
+              <p style="font-size: 0.875rem; color: var(--text-secondary);">
+                Dean of Student Affairs: <strong>Dr. V. Ramanathan</strong>
+              </p>
+            </div>
+          </div>
+
+          <!-- Pending OD Approvals -->
+          <div class="data-table-container">
+            <div style="padding: 1.25rem; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <h3 style="font-size: 1.125rem;">Pending Student On-Duty (OD) Sanctions</h3>
+                <p style="font-size: 0.75rem; color: var(--text-secondary);">Review student academic conflicts and approve attendance exemptions.</p>
+              </div>
+              <span class="badge badge-warning" id="dsa-od-count-badge">0 Pending</span>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Student & Roll</th>
+                  <th>Event Title</th>
+                  <th>Event Date</th>
+                  <th>Academic Conflict</th>
+                  <th>Reason Given</th>
+                  <th>Decision</th>
+                </tr>
+              </thead>
+              <tbody id="dsa-od-table-body">
+                <!-- Dynamically rendered -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pending Event Proposals -->
+          <div class="data-table-container">
+            <div style="padding: 1.25rem; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <h3 style="font-size: 1.125rem;">Club Event Approval Queue</h3>
+                <p style="font-size: 0.75rem; color: var(--text-secondary);">Review proposed events, venue reservations, and OD eligibility.</p>
+              </div>
+              <span class="badge badge-warning" id="dsa-event-count-badge">0 Pending</span>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Event Title</th>
+                  <th>Organizer / Club</th>
+                  <th>Date & Time</th>
+                  <th>Venue</th>
+                  <th>OD Eligible</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="dsa-event-table-body">
+                <!-- Dynamically rendered -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Institutional Audit Log -->
+          <div class="data-table-container">
+            <div style="padding: 1.25rem; border-bottom: 1px solid var(--border-subtle);">
+              <h3 style="font-size: 1.125rem;">Institutional Audit Stream</h3>
+              <p style="font-size: 0.75rem; color: var(--text-secondary);">Immutable log of registrations, approvals, and venue bookings.</p>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Actor</th>
+                  <th>Action</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody id="dsa-audit-table-body">
+                <!-- Audit logs -->
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= VIEW 7: ADMIN MASTER ================= -->
+      <section id="view-admin" class="tab-view hidden">
+        <div class="container">
+          
+          <div class="section-header" style="margin-top: 1.5rem;">
+            <div>
+              <div class="section-tag">Campus IT Systems</div>
+              <h1 class="section-title">Campus Venue Master & Facilities</h1>
+            </div>
+            <button class="btn btn-secondary btn-sm" id="btn-export-data">
+              Export Database (JSON)
+            </button>
+          </div>
+
+          <div class="data-table-container">
+            <div style="padding: 1.25rem; border-bottom: 1px solid var(--border-subtle);">
+              <h3 style="font-size: 1.125rem;">University Venues & Lecture Halls</h3>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Venue Name</th>
+                  <th>Building</th>
+                  <th>Max Capacity</th>
+                  <th>Equipped Facilities</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="admin-venues-table-body">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= VIEW 8: CLUBS DIRECTORY ================= -->
+      <section id="view-clubs" class="tab-view hidden">
+        <div class="container">
+          
+          <div class="section-header" style="margin-top: 1.5rem;">
+            <div>
+              <div class="section-tag">Student Societies</div>
+              <h1 class="section-title">Campus Clubs & Technical Societies</h1>
+            </div>
+          </div>
+
+          <div class="features-grid" id="clubs-directory-grid">
+            <!-- Dynamically populated -->
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 3. PERSISTENT EVALUATION RIBBON -->
+    <aside class="eval-ribbon" aria-label="Evaluation Console">
+      <div class="eval-ribbon-content">
+        <div class="eval-status">
+          <span class="status-pulse-dot"></span>
+          <strong>Evaluation Mode Active:</strong>
+          <span>Current Persona: <strong id="ribbon-user-label" style="color: var(--accent-terracotta);">Priya Sharma (STUDENT)</strong></span>
+        </div>
+        <div class="eval-role-switchers">
+          <span style="color: var(--text-muted); margin-right: 0.25rem;">Quick Perspective:</span>
+          <button class="eval-role-btn active" data-role="STUDENT">1. Student (Priya)</button>
+          <button class="eval-role-btn" data-role="ORGANIZER">2. Organizer (Arjun)</button>
+          <button class="eval-role-btn" data-role="DSA">3. DSA (Dr. Ramanathan)</button>
+          <button class="eval-role-btn" data-role="ADMIN">4. Admin</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 4. FOOTER -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="brand-link">
+              <div class="brand-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+              </div>
+              <span class="brand-title">Campus<span>Sync</span></span>
+            </div>
+            <p class="footer-brand-desc">
+              Academic-context-aware university event coordination platform connecting campus events with student timetables, conflict detection, DSA approvals, and verified OD attendance.
+            </p>
+          </div>
+
+          <div>
+            <div class="footer-heading">Portals</div>
+            <ul class="footer-links-list">
+              <li><a href="#discover" data-tab="discover">Discover Events</a></li>
+              <li><a href="#timetable" data-tab="timetable">Student Timetable</a></li>
+              <li><a href="#registrations" data-tab="registrations">Gate Passes & OD</a></li>
+              <li><a href="#clubs" data-tab="clubs">Campus Clubs</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="footer-heading">Administration</div>
+            <ul class="footer-links-list">
+              <li><a href="#organizer" data-tab="organizer">Club Organizer Console</a></li>
+              <li><a href="#dsa" data-tab="dsa">DSA Approvals</a></li>
+              <li><a href="#admin" data-tab="admin">Venue Directory</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="footer-heading">Institutional Policy</div>
+            <p style="font-size: 0.8125rem; line-height: 1.5; color: var(--text-secondary);">
+              Approved OD exemptions are sent directly to the Academic Registrar for automatic attendance normalization.
+            </p>
+          </div>
+        </div>
+
+        <div class="footer-bottom-bar">
+          <div>&copy; 2026 CampusSync Institutional Systems. All rights reserved.</div>
+          <div>Synchronized with Central Academic ERP &bull; Port 3000</div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ================= MODALS & DRAWERS ================= -->
+
+    <!-- CONFLICT & REGISTRATION MODAL -->
+    <div id="modal-conflict" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="conflict-modal-title">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div>
+            <span style="font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; color: var(--accent-terracotta); letter-spacing: 0.05em;">
+              Schedule Compatibility Engine
+            </span>
+            <h2 id="conflict-modal-title" style="font-size: 1.125rem;">Event Registration & Timetable Check</h2>
+          </div>
+          <button class="icon-btn" id="btn-close-conflict-modal" aria-label="Close modal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <div class="modal-body" id="conflict-modal-body">
+          <!-- Filled dynamically by app.js -->
+        </div>
+
+        <div class="modal-footer" id="conflict-modal-footer">
+          <button class="btn btn-secondary" id="btn-cancel-conflict-modal">Cancel</button>
+          <button class="btn btn-primary" id="btn-confirm-registration">Confirm & Generate Gate Pass</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TICKET / GATE PASS MODAL -->
+    <div id="modal-ticket" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="ticket-modal-title">
+      <div class="modal-dialog" style="max-width: 480px;">
+        <div class="modal-header">
+          <h2 id="ticket-modal-title" style="font-size: 1.125rem;">Official Digital Gate Pass</h2>
+          <button class="icon-btn" id="btn-close-ticket-modal" aria-label="Close pass">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <div class="modal-body" id="ticket-modal-body">
+          <!-- Dynamic QR code and pass contents -->
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary" onclick="window.print()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+            Print Pass
+          </button>
+          <button class="btn btn-primary" id="btn-done-ticket-modal">Done</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTIFICATION SLIDE-OUT DRAWER -->
+    <div id="drawer-notifications" class="drawer-overlay" role="dialog" aria-modal="true" aria-labelledby="drawer-notif-title">
+      <div class="drawer-panel">
+        <div class="drawer-header">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+            <h2 id="drawer-notif-title" style="font-size: 1.125rem;">Notifications</h2>
+          </div>
+          <button class="icon-btn" id="btn-close-notif-drawer" aria-label="Close drawer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <div class="drawer-body" id="notif-list-container">
+          <!-- Populated by app.js -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Vanilla ES6 Application Controller -->
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>

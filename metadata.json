@@ -1,0 +1,8 @@
+{
+  "name": "CampusSync - University Event & Academic Coordination Platform",
+  "description": "Academic-context-aware university event coordination platform connecting campus events with student timetables, conflict detection, DSA approvals, and verified OD attendance.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
